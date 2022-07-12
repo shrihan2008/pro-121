@@ -1,4 +1,3 @@
-
 import cv2
 import time
 from cv2 import COLOR_BGR2HSV
@@ -26,7 +25,7 @@ while(cap.isOpened()):
     u_black=np.array([104, 153,78])
     l_black=np.array([30, 30, 5])
     
-    mask=cv2.inRange(hsv,l_black,u_black)
+    mask=cv2.inRange(Frame,l_black,u_black)
     res=cv2.bitwise_and(Frame,Frame,mask=mask)
 
     last_output=cv2.addWeighted(res,1,res,1,0)
@@ -34,9 +33,10 @@ while(cap.isOpened()):
     cv2.imshow("Hello",last_output)
     cv2.waitKey(1)
 
-    
     f=Frame-res
     f=np.where(f==0,Image,f)
+
+    
 
     if cv2.waitKey(1) & 0xFF==ord('q'):
             break
@@ -44,7 +44,7 @@ while(cap.isOpened()):
 
 
 cap.release()
-out.release()
+
 cv2.destroyAllWindows()
 
 #l_black = np.array([0, 120, 50]) u_black = np.array([10, 255,255]) mask_1 = cv2.inRange(hsv, l_black, u_black) l_black = np.array([170, 170, 70]) u_black = np.array([180, 255, 255])
